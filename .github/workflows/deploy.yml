@@ -1,0 +1,68 @@
+name: CI/CD Pipeline (Razorbill)
+
+on:
+  push:
+    paths:
+      - "razorbill-frontend/**"
+      - "razorbill-backend/**"
+      - "k8s/**"
+      - ".github/workflows/deploy.yml"
+  pull_request:
+    paths:
+      - "razorbill-frontend/**"
+      - "razorbill-backend/**"
+      - "k8s/**"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # Log in to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build & push backend
+      - name: Build & push backend
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/razorbill-backend:latest ./razorbill-backend
+          docker push ${{ secrets.DOCKER_USERNAME }}/razorbill-backend:latest
+
+      # Build & push frontend
+      - name: Build & push frontend
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/razorbill-frontend:latest ./razorbill-frontend
+          docker push ${{ secrets.DOCKER_USERNAME }}/razorbill-frontend:latest
+
+      # --- Install k3d (lightweight Kubernetes) ---
+      - name: Install k3d
+        run: |
+          curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+      # Create a k3d cluster
+      - name: Create k3d cluster
+        run: |
+          k3d cluster create ci-cd-cluster --agents 1 --wait
+          kubectl cluster-info
+
+      # Inject backend secret securely
+      - name: Create backend secret
+        run: |
+          kubectl create secret generic backend-secret \
+            --from-literal=OPENROUTER_API_KEY=${{ secrets.OPENROUTER_API_KEY }} \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      # Deploy all manifests
+      - name: Deploy manifests
+        run: |
+          kubectl apply -f k8s/
+          kubectl rollout status deployment/razorbill-backend
+          kubectl get pods -o wide
+          kubectl get svc
