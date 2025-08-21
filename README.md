@@ -23,23 +23,11 @@ The project demonstrates a complete DevOps workflow, including **containerizatio
 - Monitoring stack (Prometheus + Grafana)
 - Scalable deployment with NodePort services
 
-## 🌍 Live Demo (replace with real links if deployed)
-
-- Frontend: [http://your-frontend-link.com](http://your-frontend-link.com)
-- Backend API: [http://your-backend-link.com](http://your-backend-link.com)
-- Grafana Dashboard: [http://your-grafana-link.com](http://your-grafana-link.com)
-- Prometheus: [http://your-prometheus-link.com](http://your-prometheus-link.com)
 
 ## 📊 Monitoring
 
 - **Prometheus:** collects cluster and application metrics
 - **Grafana:** provides visual dashboards for Kubernetes and application insights
-
-## 📷 Screenshots (to add)
-
-- Frontend application running
-- Grafana dashboard with metrics
-- Architecture diagram
 
 ## 📐 Architecture Diagram
 
@@ -56,6 +44,74 @@ Frontend (React + Nginx) Backend (Django REST)
 ------- Kubernetes -------
 |
 Prometheus + Grafana
+
+## Deployment Proof (Local Minikube)
+
+### Kubectl Pods
+
+![docker ps](screenshots/pods.png)
+
+### Kubectl Services
+
+![docker ps](screenshots/svc.png)
+
+### Kubectl Ingress
+
+![docker ps](screenshots/ingress.png)
+
+### Kubectl Monitoring
+
+![docker ps](screenshots/mon.png)
+
+### Kubectl logs
+
+![docker ps](screenshots/logs.png)
+
+### Frontend
+
+![frontend](screenshots/frontend.png)
+
+### Backend
+
+![backend](screenshots/backend.png)
+
+### GitHub Actions Build
+
+![github actions](screenshots/ci.png)
+
+### Prometheus
+
+![backend](screenshots/prometheus.png)
+
+### Grafana
+
+![backend](screenshots/grafana.png)
+
+---
+
+## Security and Secrets Management
+
+- No hard-coded credentials in code or manifests
+- Sensitive values are managed via **`secret.yaml`**
+- Non-sensitive configurations are managed via **`configmap.yaml`**
+- Kubernetes Secrets and ConfigMaps are mounted into pods at runtime
+- Docker images are built following the least-privilege principle
+
+---
+
+## Why This Project Matters for DevOps
+
+This project demonstrates:
+
+- Multi-service containerization with **Docker**
+- **Infrastructure as Code** with Kubernetes manifests
+- Automated **CI/CD** with GitHub Actions
+- Secure secret and config management using Kubernetes **Secret** and **ConfigMap**
+- Health checking and automatic log collection
+- **Monitoring with Prometheus** (metrics collection) and **Grafana** (dashboards & visualization)
+- Deployment-ready stack that can be extended with full observability
+
+---
 
 ## 👨‍💻 Author
 
