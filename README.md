@@ -57,7 +57,7 @@ Frontend (React + Nginx) Backend (Django REST)
 |
 Prometheus + Grafana
 
-## Author
+## 👨‍💻 Author
 
 **Victor Muthomi**
 **DevOps Engineer** | **Cloud & Kubernetes Enthusiast**
