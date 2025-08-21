@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: razorbill-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: razorbill-frontend
+  template:
+    metadata:
+      labels:
+        app: razorbill-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: victormdevops/razorbill-frontend:latest
+          ports:
+            - containerPort: 80
