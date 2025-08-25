@@ -29,8 +29,6 @@ The project demonstrates a complete DevOps workflow, including **containerizatio
 
 Used to **provision infrastructure** such as Kubernetes clusters and supporting resources.
 
-![terraform](screenshots/terraform.png)
-
 ### Ansible
 
 Used to **configure the environment** and manage **Helm deployments** (e.g., Prometheus & Grafana).
