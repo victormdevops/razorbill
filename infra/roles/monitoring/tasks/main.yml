@@ -1,0 +1,3 @@
+---
+- name: Deploy monitoring stack
+  import_tasks: ../../tasks/deploy_monitoring.yml

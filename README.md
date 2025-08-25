@@ -23,6 +23,17 @@ The project demonstrates a complete DevOps workflow, including **containerizatio
 - Monitoring stack (Prometheus + Grafana)
 - Scalable deployment with NodePort services
 
+## Infrastructure Automation (IaC)
+
+### Terraform
+
+Used to **provision infrastructure** such as Kubernetes clusters and supporting resources.
+
+![terraform](screenshots/terraform.png)
+
+### Ansible
+
+Used to **configure the environment** and manage **Helm deployments** (e.g., Prometheus & Grafana).
 
 ## 📊 Monitoring
 
@@ -86,6 +97,18 @@ Prometheus + Grafana
 ### Grafana
 
 ![backend](screenshots/grafana.png)
+
+### IaC
+
+![ansible](screenshots/tree.png)
+
+### Terraform
+
+![ansible](screenshots/terraform.png)
+
+### Ansible
+
+![ansible](screenshots/ansible.png)
 
 ---
 

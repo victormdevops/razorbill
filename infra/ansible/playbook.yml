@@ -1,0 +1,7 @@
+- name: Demo Ansible Playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Print success message
+      debug:
+        msg: "Ansible playbook executed successfully 🚀"
